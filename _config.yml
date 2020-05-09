@@ -2,12 +2,8 @@ title: igarash1
 google_analytics:
 
 header_pages:
-  - index.md
-  - about.md
-  - page: github
-    url:  https://github.com/igarash1
-  - page: twitter
-    url:  https://twitter.com/igarash1
+  '<a href="https://igarash1.github.io/">/</a> / <a href="/about/">about</a> / <a href="https://github.com/igarash1">github</a> / <a href="https://twitter.com/igarash1">twitter</a>'
+
 
 footer: 
   '<a href="mailto:igarashi.kouki@gmail.com">contact</a> /<a href="https://github.com/igarash1/igarash1.github.io">source</a>'
@@ -15,7 +11,7 @@ footer:
 style: light
 
 plugins:
-- jekyll-seo-tag
+  - jekyll-seo-tag
 
 markdown: kramdown
 remote_theme: b2a3e8/jekyll-theme-console
