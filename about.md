@@ -4,7 +4,7 @@ title: /about
 permalink: /about/
 ---
 
-Hi! I'm an undergraduate student majoring in mathematics.
+Hi! I'm an undergraduate student majoring in mathematics. You might know me by seeing the followings :
 
 [Github](https://github.com/igarash1)
 

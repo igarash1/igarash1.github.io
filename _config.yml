@@ -2,11 +2,12 @@ title: igarash1
 google_analytics:
 
 header_pages:
-  '<a href="https://igarash1.github.io/">/</a> / <a href="/about/">about</a> / <a href="https://github.com/igarash1">github</a> / <a href="https://twitter.com/igarash1">twitter</a>'
-
+  - index.md
+  - about.md
+  - contact.md
 
 footer: 
-  '<a href="mailto:igarashi.kouki@gmail.com">contact</a> /<a href="https://github.com/igarash1/igarash1.github.io">source</a>'
+  '<a href="https://github.com/igarash1/igarash1.github.io">source</a>'
 
 style: light
 
