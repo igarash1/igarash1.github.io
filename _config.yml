@@ -1,4 +1,16 @@
 title: igarash1
-description: Hi! This is igarash1. I'm an undergraduate student majoring in mathemtics.
 google_analytics:
-theme: jekyll-theme-modernist
+
+header_pages:
+  - index.md
+  - about.md
+  - '<a href="https://github.com/igarash1">github</a>'
+  - '<a href="https://twitter.com/igarash1">twitter</a>'
+
+
+footer: 
+  - '<a href="mailto:igarashi.kouki@gmail.com">contact</a>'
+  - '<a href="https://github.com/igarash1/igarash1.github.io">source</a>'
+
+markdown: kramdown
+remote_theme: b2a3e8/jekyll-theme-console
