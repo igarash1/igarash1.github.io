@@ -5,4 +5,4 @@ layout: home
 # Welcome!
 
 
-![oze](res/oze.jpg=532x355)
+![oze](res/oze_30.jpg)
