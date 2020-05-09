@@ -13,6 +13,11 @@ style: light
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-responsive-image
 
 markdown: kramdown
 remote_theme: b2a3e8/jekyll-theme-console
+
+responsive_image:
+  template: _includes/responsive-image.html
+  
