@@ -4,7 +4,9 @@ layout: home
 
 # Welcome!
 
-<img src="res/oze_32.jpg" srcset="res/oze_18.jpg 320w,
+<img src="res/oze_30.jpg 533w" srcset="res/oze_15.jpg 266w,
+res/oze_18.jpg 320w,
      res/oze_20.jpg 355w,
      res/oze_30.jpg 533w,
-     res/oze_32.jpg 568w"/>
+     res/oze_32.jpg 568w,
+     res/oze.jpg 1776w"/>
