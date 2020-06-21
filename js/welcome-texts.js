@@ -9,5 +9,5 @@ request.onload = function() {
     var randomText = fileContentTexts[ randomLineIndex ];
     document.getElementById( '#welcome-text' ).innerHTML = randomText;
 };
-request.open( 'GET', 'welcome-texts.txt', true );
+request.open( 'GET', '/res/welcome-texts.txt', true );
 request.send();
