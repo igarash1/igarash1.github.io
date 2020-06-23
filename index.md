@@ -19,3 +19,4 @@ document.addEventListener('DOMContentLoaded',function(){
   new SmartPhoto(".js-smartphoto").zoomPhoto();
 });
 </script>
+

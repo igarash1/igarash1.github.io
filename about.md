@@ -1,7 +1,7 @@
 ---
 layout: page
 title: /about
-permalink: /about/
+permalink: /about
 ---
 
 Hi! I'm an undergraduate student majoring in mathematics.
