@@ -139,3 +139,57 @@ article .header {
     font-size: 1.8rem;
   }
 }
+
+.theorem {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.theorem:before {
+  content: "Theorem.";
+  font-weight: bold;
+  font-style: italic;
+}
+.lemma {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.lemma:before {
+  content: "Lemma.";
+  font-weight: bold;
+  font-style: normal;
+}
+.proposition {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.proposition:before {
+  content: "Proposition.";
+  font-weight: bold;
+  font-style: italic;
+}
+.proof {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.proof:before {
+  content: "Proof.";
+  font-style: italic;
+}
+.proof:after {
+  content: "\25FC";
+  float:right;
+}
+.definition {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.definition:before {
+  content: "Definition.";
+  font-weight: bold;
+  font-style: italic;
+}
