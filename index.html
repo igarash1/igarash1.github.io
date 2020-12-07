@@ -6,16 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>igarash1</title>
         <link rel="stylesheet" href="./css/default.css" />
-        <script>
-            MathJax = {
-                chtml: {
-                    matchFontHeight: false
-                },
-                tex: {
-                    inlineMath: [[", "]]
-                }
-            };
-        </script>
         <script type="text/x-mathjax-config">
           MathJax.Hub.Config({
             extensions: [
@@ -32,6 +22,11 @@
                 "noErrors.js",
                 "noUndefined.js",
               ]
+            },
+            tex2jax: {
+              inlineMath: [ [","], ["\(", "\)"] ],
+              displayMath: [ ["$","$"] ],
+              processEscapes: true,
             }
           });
         </script>
@@ -53,9 +48,7 @@
 
         <main role="main">
             <h1>Home</h1>
-            <h2>Welcome</h2>
-
-<img src="./images/oze.png" style="float: right; margin: 10px;" />
+            <img src="./images/oze.png" style="float: right; margin: 10px;" />
 
 <p>Welcome!</p>
 
