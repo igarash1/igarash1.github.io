@@ -66,11 +66,7 @@
 <p>The minimum amount <span class="math inline"><em>a</em></span> for which a greedy solution is not optimal is up to <span class="math inline">2<em>c</em><sub><em>n</em></sub></span>. i.e., <span class="math inline"><em>a</em> ≤ 2<em>c</em><sub><em>n</em></sub></span>.</p>
 </div>
 <div class="proof">
-<p>Let’s define some notations for simplicity as follows: <span class="math display">$$
-    a := \text{the minimum of all amounts for which the greedy solution is not optimal},  \\\\\\
-    opt(x) := \text{the optimal solution for }x,   \\\\\\
-    grd(x) := \text{the greedy solution for }x.  
-$$</span></p>
+<p>Let’s define some notations for simplicity as follows: <span class="math display"><em>a</em> := the minimum of all amounts for which the greedy solution is not optimal,</span> <span class="math display"><em>o</em><em>p</em><em>t</em>(<em>x</em>) := the optimal solution for <em>x</em>,</span> <span class="math display"><em>g</em><em>r</em><em>d</em>(<em>x</em>) := the greedy solution for <em>x</em>.</span></p>
 <p>If we assume <span class="math inline"><em>a</em> &gt; 2<em>c</em><sub><em>n</em></sub></span> , <span class="math inline"><em>o</em><em>p</em><em>t</em>(<em>a</em>) &lt; <em>g</em><em>r</em><em>d</em>(<em>a</em>)</span> is true by definition.</p>
 <p>Since <span class="math inline"><em>c</em><sub><em>n</em></sub> &lt; <em>a</em> − <em>c</em><sub><em>n</em></sub> &lt; <em>a</em></span>, <span class="math display"><em>g</em><em>r</em><em>d</em>(<em>a</em>) = <em>g</em><em>r</em><em>d</em>(<em>a</em> − <em>c</em><sub><em>n</em></sub>) + 1 = <em>o</em><em>p</em><em>t</em>(<em>a</em> − <em>c</em><sub><em>n</em></sub>) + 1.</span></p>
 <p>Also, since we know <span class="math inline"><em>c</em><sub><em>n</em></sub> &lt; <em>a</em> − <em>c</em><sub><em>n</em></sub> &lt; <em>a</em> − <em>c</em><sub><em>i</em></sub> &lt; <em>a</em></span> for all <span class="math inline"><em>c</em><sub><em>i</em></sub></span>, and by the definition of <span class="math inline"><em>o</em><em>p</em><em>t</em></span>, <span class="math display">$$
