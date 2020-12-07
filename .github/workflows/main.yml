@@ -6,7 +6,7 @@ name: Build and deploy to github pages
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ hakyll ]
   # pull_request:
     # branches: [ hakyll ]
 
@@ -18,15 +18,16 @@ jobs:
   # This workflow contains a single job called "build"
   build-deploy:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest      
-    GHC_VERSION: '8.6.5'
-    CABAL_VERSION: '2.4.0.0'
+    runs-on: ubuntu-latest
+    env:
+      GHC_VERSION: '8.6.5'
+      CABAL_VERSION: '3.0'
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # - uses: actions/checkout@v2
-      - uses: actions/checkout@master
+      - uses: actions/checkout@hakyll
 
       - uses: actions/setup-haskell@v1
         with:
@@ -60,7 +61,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v2.5.0
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: master
+          PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: _site
-          EXTERNAL_REPOSITORY: robx/robx.github.io
-        if: github.ref == 'refs/heads/master'
+          EXTERNAL_REPOSITORY: igarash1/igarash1.github.io
+        if: github.ref == 'refs/heads/hakyll'
