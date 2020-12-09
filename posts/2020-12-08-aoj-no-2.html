@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>igarash1</title>
+        <link rel="stylesheet" href="../css/default.css" />
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            extensions: [
+              "MathMenu.js",
+              "MathZoom.js",
+              "AssistiveMML.js",
+              "a11y/accessibility-menu.js"
+            ],
+            jax: ["input/TeX", "output/CommonHTML"],
+            TeX: {
+              extensions: [
+                "AMSmath.js",
+                "AMSsymbols.js",
+                "noErrors.js",
+                "noUndefined.js",
+              ]
+            },
+            tex2jax: {
+              inlineMath: [ [","], ["\(", "\)"] ],
+              displayMath: [ ["$","$"] ],
+              processEscapes: true,
+            }
+          });
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">igarash1</a>
+            </div>
+            <nav>
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </nav>
+        </header>
+
+        <main role="main">
+            <h1>My Notes on AOJ</h1>
+            <article>
+    <header>
+        <em>
+            Published on December  8, 2020
+            <br>Last updated on December  9, 2020
+            
+            
+        </em>
+    </header>
+    <section>
+        <h4 id="convexcut"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2442">2442 ConvexCut</a></h4>
+<hr />
+<p>任意の直線に対して面積が二等分される点Pが存在すると仮定すると, その点を通るx軸とy軸に平行な直線についても面積が二等分される. [https://igarash1-sol.hatenablog.com/entry/2018/06/24/172358:title=多角形の面積の公式]をみれば分かる思うけど, 全ての頂点について点Pに関して点対称な頂点が存在することも分かる. 逆にそういう点Pが存在すればその点を通る任意の直線は面積を二等分する. 結局, 各頂点対が同じ点に対して点対称になっているかを調べるだけでよい. 制約が緩いのでO(N^4)とかでテキトーに調べても解ける.</p>
+<p>Assuming that there exists a point P whose area is bisected for a given line, a line parallel to the x- and y-axes passing through the point is also bisected. As can be seen from [https://igarash1-sol.hatenablog.com/entry/2018/06/24/172358:title=多角形の面積の公式], we also know that for every vertex there is a point P that is point-symmetric. Conversely, if such a point P exists, then any line passing through it will bisect its area. After all, we only need to check if each vertex pair is point-symmetric with respect to the same point. Since the constraints are loose, it is possible to solve the problem by just checking O(N^4) and so on.</p>
+<h4 id="king-slime"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2382">2382 King Slime</a></h4>
+<hr />
+<p>King Slimeになった地点から逆にコースを辿ってみると分かりやすいが, 各スライムの初期地点か壁の地点しかスライムは留まることができないことが分かる. そこで, まずx軸かy軸方向に同じスライムがあればくっつけてしまうが良さそうなことも分かる. そうしてスライムをくっつければ, 各x座標とy座標には高々1つのスライムしか存在しなくなり, 対角線上にスライムが一列に並んでいるような状態にできることが分かる. この状態のスライムは壁に移動させて合体させてやるのが最善. 壁は4方向あるのでそれぞれの場合で, 最小の移動数を求める. スライムが壁にいる場合やスライムを角に追いやらなくても良いケースなどがあって, 場合分けが少し面倒だった. くっつけ方は順番なども関係してくるので, グラフの連結成分として扱ってしまうとよく, Union Findを使うと簡単. 計算量は O(N * Ack(N) + W + H).</p>
+<p>If you follow the course backward from the King Slime, it is easy to see that the slime can only stay at the initial point of each slime or at the wall. Then, you can see that it is better to attach the same slime on the x- or y-axis if it is present. It is shown that if the slimes are attached in this way, there will be only one slime in each x- and y-coordinate at most, and the slimes will be arranged in a diagonal line. It is best to combine the slimes in this state by moving them to the wall. Since the wall has four directions, we find the minimum number of moves in each case. In some cases, it is not necessary to drive the slime to the corner. Since the order of these cases is also relevant, it is better to treat them as a connected component of the graph, which is easier to do using Union Find. The computational complexity is O(N * Ack(N) + W + H).</p>
+<h4 id="there-is-no-alternative"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1350">1350 There is No Alternative</a></h4>
+<hr />
+<p>各辺を除いたグラフでMSTを作ってみて, MSTが作れないか, MSTの辺の総和が(どの辺も除かない場合の)元のMSTより大きくなればその辺が No Alternative Bridge であることは思いつく. しかし, これでは計算量が O( 辺の数 ) * O(MSTの計算量) になり間に合わない. ここで, 各MSTに共通する辺はある1つのMSTにも必ず存在するということに気づけば, 調べる辺は O(N) 個だけでよいことがわかる. 最終的には O(N * E log N) で解ける.</p>
+<p>Try to build MST with the graph without each edge, and if you can’t build MST or the sum of the MST edges is greater than the original MST (if you don’t exclude any edges), then you can figure out that the edge is No Alternative Bridge. However, this means that the computational complexity is O(number of edges) * O(computational complexity of the MST) and we cannot make it in time. If we realize that there is always an edge common to all MSTs, we find that we need only O(N) edges to examine. In the end, we can solve for O(N * E log N).</p>
+<h4 id="marathon-match"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2303">2303 Marathon Match</a></h4>
+<hr />
+<p>P[i][j] := 選手 i が j 回休憩する確率, G[i][t] := 選手 i が時間 t でゴールする確率, W[i][t] := 選手 i が時間 t で優勝する確率, Tij := L/V[i] + j * T[i] (選手 i が j 回休憩してゴールするのにかかる時間) とすると, G[i][t] = Σ_{j} P[i][j] (t = Tij), W[i][t] = G[i][t] * (1 - Σ_{k != i, t’ &lt;= t}G[k][t’]) であり, 選手 i が優勝する確率は ΣW[i][t] となる. ゴールする時間は整数にならない場合があるが, 時間は選手の速度と選手の休憩回数(及び休憩時間)にしか依存しないので G, W は同時に計算できて, O(N<sup>2M</sup>2) で解ける. cout だと出力形式でWAをもらったので, 結局 printf で 桁数指定した.</p>
+<p>P[i][j] := the probability that player i will rest j times, G[i][t] := the probability that player i will score a goal at time t, W[i][t] := the probability that player i will win at time t, Tij := L/V[i] + j * T[i] (the time it takes for athlete i to rest and finish j times) And then, G[i][t] = Σ_{j} P[i][j] (t = Tij), W[i][t] = G[i][t] * (1 - Σ_{k ! = i, t’ &lt;= t}G[k][t’]) and the probability that athlete i will win is ΣW[i][t]. The time to finish may not be an integer, but since the time depends only on the speed of the player and the number of rest periods (and rest periods) of the player, G and W can be calculated simultaneously and solved by O(N<sup>2M</sup>2). In cout, I got WA in the output format, so I ended up using printf to specify the number of digits.</p>
+<h4 id="invisible"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2741">2741 Invisible</a></h4>
+<p>ターンをパスするとスタックのカードは全て取り除かれてしまうので, スタックには同じプレイヤーが連続してカードを置くことはなく, プレイヤー1とプレイヤー2のカードが交互に置かれることが分かる. 従って, 各プレイヤーのデッキの残り枚数とスタックにカードを置いた最後のプレイヤーの情報があれば, スタックのカードが順番も含めて分かる(復元できる). 状態数は O(n * m * (n + m) * 4) 程度なので, メモ化再帰探索で解ける.</p>
+<p>Passing the turn removes all the cards from the stack, so the stack is never filled with cards from the same player in succession, but rather with cards from Player 1 and Player 2 in turn. Thus, given the number of cards remaining in each player’s deck and the information of the last player who placed a card on the stack, the cards in the stack, including their order, are known (and can be recovered). Since the number of states is of the order O(n * m * (n + m) * 4), it can be solved by a memorized recursive search.</p>
+<h4 id="reverse-roads"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2304">2304 Reverse Roads</a></h4>
+<hr />
+<p>逆方向同士の2辺を最大流で使うことはない(打ち消し合うので, 両方向に同時に流すような増加路はない)ので, 元のグラフに逆方向の辺も追加したグラフ(或いは無向グラフと考えても良い)で最大流を求めて, 求めた最大流で使われた逆方向の辺を確認する.</p>
+<p>Since we never use two opposite sides of the maximum flow (since they cancel each other out, there is no such increase path in both directions at the same time), we find the maximum flow in the original graph plus the opposite side (or, alternatively, we can think of it as an undirected graph), and check the opposite side used in the maximum flow obtained.</p>
+<h4 id="a-holiday-of-miss-brute-force"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2425">2425 A Holiday of Miss Brute Force</a></h4>
+<hr />
+<p>お姉さんの指示は座標と経過時間を6で割った余りにしか依存しないので, 状態数はO(lx * ly * 6)個程度に抑えられる. 後はその状態をノード, お姉さんを無視した回数をコストとして考えたグラフ上で最短経路を求める. x 座標の偶奇で遷移先が変わることにも注意する. 計算量は O(N log N) (N = lx * ly).</p>
+<p>Since the instructions of the sister depend only on the remainder of the coordinate and elapsed time divided by 6, the number of states can be reduced to about O(lx * ly * 6). We then find the shortest path on the graph with the states as nodes and the number of times the sister is ignored as the cost. Note that even oddities of x-coordinates can change the transition destination. The computational complexity is O(N log N) (N = lx * ly).</p>
+<p>スタンプを最後に押した部分の絵はそれ以前にどんなスタンプを押しても構わないことに着目して, 絵のどの部分を考えているかを状態とすると状態数はO(2^16)しかない. ある状態を完成させるのに必要な最小のスタンプ数は, その状態の各マスを角として(各)スタンプを押す前の状態を完成させるのに必要な最小のスタンプ数で求まるので, 漸化式が立てられDPができる. それぞれの状態について, 各マスを各スタンプの4角のいずれかで押していけばよいので計算量は O(2^16 * N * 4 * 4) 程度. メモ化再帰だとTLEした.</p>
+<h4 id="rectangular-stamps"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2297">2297 Rectangular Stamps</a></h4>
+<hr />
+<p>スタンプを最後に押した部分の絵はそれ以前にどんなスタンプを押しても構わないことに着目して, 絵のどの部分を考えているかを状態とすると状態数はO(2^16)しかない. ある状態を完成させるのに必要な最小のスタンプ数は, その状態の各マスを角として(各)スタンプを押す前の状態を完成させるのに必要な最小のスタンプ数で求まるので, 漸化式が立てられDPができる. それぞれの状態について, 各マスを各スタンプの4角のいずれかで押していけばよいので計算量は O(2^16 * N * 4 * 4) 程度. メモ化再帰だとTLEした.</p>
+<p>Noting that the part of the picture that was last stamped can be stamped with any previous stamp, the number of states is only O(2^16) if we consider any part of the picture as a state. The minimum number of stamps required to complete a state is determined by the minimum number of stamps required to complete the state before (each) stamped square of the state as a corner, so that a gradualization formula can be formulated and DP can be obtained. For each state, we need to press each square with one of the four corners of each stamp, so the computational complexity is about O(2^16 * N * 4 * 4). For memorized recursion, you can TLE it.</p>
+<h4 id="map-of-ninja-house"><a href="https://onlinejudge.u-aizu.ac.jp/problems/1236">1236 Map of Ninja House</a></h4>
+<hr />
+<p>グラフを行きがけ順で記録した情報が与えられるので, グラフを復元せよという問題. 読解問題. DFSでO(V + E) でも O(V^2) でも通る. 最初の部屋からの距離が同じであるような既に通った部屋が複数考えられるケースがあるので, その際はドア数に空きがある方の部屋と繋ぐように注意する.</p>
+<p>You are given information about the graphs in historical order and are asked to reconstruct the graphs. A reading problem. A DFS can pass both O(V + E) and O(V^2). In some cases, there are several possible rooms that have already been passed through such that the distance from the first room is the same, so be careful to connect the room with the one that has a vacancy in the number of doors.</p>
+<h4 id="a-light-road"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2342">2342 A Light Road</a></h4>
+<hr />
+<p>各マスについてミラー P, Q がそれぞれ何枚残っているか, どの方向からそのマスに来たかという状態を考え, そこからの遷移先を考えると, その状態からは自身の状態には戻らないことが分かる(グラフで考えると DAG になっている). よって, 経路などは無視してその状態だけを考え DP をすればよく, 計算量は O(A^2 * 4 * NM).</p>
+<p>Considering the number of mirrors P and Q in each square and the direction from which the square was reached, we can see that the square does not return to its own state (in the graph, the state is DAG). Therefore, it is sufficient to ignore the path and perform DP considering only that state, and the computational complexity is O(A^2 * 4 * NM).</p>
+<h4 id="cookie-counter"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2595">2595 Cookie Counter</a></h4>
+<hr />
+<p>f(d, c) = d 日でクッキーを1日1個以上食べて全体で c 個たべる食べ方の総数(順番も含む) として, 後は考えられる i (&lt;= min(D, N) ) で f(i,N) * <sub>D</sub>C<sub>i</sub>を計算する.</p>
+<p>As f(d, c) = d the total number of ways to eat more than 1 cookie a day in a day and total number of ways to eat c cookies in a day (including the order), we can then compute f(i,N) * <sub>D</sub>C<sub>i</sub> in the possible i (&lt;= min(D, N) ).</p>
+<h4 id="curtain"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2747">2342 Curtain</a></h4>
+<hr />
+<p>与えられる窓の辺はx軸に平行かy軸に平行かのいずれかであり, カーテンは反時計周りに与えられるので, y座標の上下で窓の左側の辺(x軸負方向からその辺を超えると多角形の内側に入れる辺)と右側の辺(x軸正方向からその辺を超えると多角形の内側に入れる辺)が分かる. 後はその左側の辺と右側の辺を出し入れするようにして, x軸方向に平面走査すればカーテンに覆われていない窓の面積が求まる. 事前に出てくるy座標ですべての(垂直な)辺を切ってしまうと, 平面走査の途中で出てくる長方形はカーテンにすべて覆われているか, 重なりがないかのいずれかになったりして実装が楽になる. 計算量は O(N^2) になった(([https://www.spoj.com/problems/WINDOW1/:title=SPOJ WINDOW1] は同じような見た目の問題だが, 実際同じような平面走査で償却O(N^2)で解ける.)). 想定解法は座標圧縮して O(N^3) で1マスずつ見ていく方法らしいので, そちらのほうが実装は圧倒的に楽. [https://igarash1-sol.hatenablog.com/entry/2018/06/24/172358:title=多角形の面積を求めるアルゴリズム]を使えばうまく凹凸部分が処理されて O(N) でも解けるらしい.</p>
+<p>Since the window edge is either parallel to the x-axis or parallel to the y-axis, and the curtain is given counterclockwise, the left side of the window above and below the y-coordinate (the side that goes beyond the negative x-axis edge to the inside of the polygon) and the right side of the window (the side that goes beyond the positive x-axis edge to the inside of the polygon) are found. By moving the left and right sides in and out of the polygon and scanning the plane along the x-axis, the area of the window that is not covered by the curtain is found. Cutting all the (perpendicular) edges in the y-coordinate beforehand makes the implementation easier as the rectangles that emerge during the plane scan are either all covered by the curtain or do not overlap. The computational complexity is now O(N^2) ([https://www.spoj.com/problems/WINDOW1/:title=SPOJ WINDOW1] is a similar looking problem, but it can actually be solved with the same planar scan and amortization O(N^2)). . The assumed solution is to compress the coordinate system and look at each square with O(N^3), which is far easier to implement. It seems that [https://igarash1-sol.hatenablog.com/entry/2018/06/24/172358:title=多角形の面積を求めるアルゴリズム] can handle the unevenness of the solution in O(N) well.</p>
+<h4 id="ai"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2643">2643 AI</a></h4>
+<hr />
+<p>構文解析. while文の無限ループとかには気をつける.</p>
+<h4 id="similarity-of-subtrees"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2784">2784 Similarity of Subtrees</a></h4>
+<hr />
+<p>TODO.</p>
+<h4 id="identity-function"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2720">2720 Identity Function</a></h4>
+<hr />
+<p>実験とか式変形とかしていると N 以下のすべての整数 a について a<sup>N<sup>k</sup></sup> mod N ≡ a が成り立つようなとなる最小の k を求めればよいことが分かる. TODO.</p>
+<p>Experiments and formula transformations show that for every integer a <N>N<sup>k</sup></sup> less than or equal to N, we need to find the minimum k such that a<sup>N<sup>k</sup> mod N ≡ a.</p>
+<p>TODO.</p>
+<h4 id="black-company"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2726">2726 Black Company</a></h4>
+<hr />
+<p>TODO.</p>
+<h4 id="floating-point-numbers"><a href="https://onlinejudge.u-aizu.ac.jp/problems/1628">2726 Floating-Point Numbers</a></h4>
+<hr />
+    </section>
+    <section>
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://igarash1.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        Copy
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </footer>
+    </body>
+</html>
