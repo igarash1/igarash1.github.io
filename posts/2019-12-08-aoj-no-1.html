@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>igarash1</title>
+        <link rel="stylesheet" href="../css/default.css" />
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            extensions: [
+              "MathMenu.js",
+              "MathZoom.js",
+              "AssistiveMML.js",
+              "a11y/accessibility-menu.js"
+            ],
+            jax: ["input/TeX", "output/CommonHTML"],
+            TeX: {
+              extensions: [
+                "AMSmath.js",
+                "AMSsymbols.js",
+                "noErrors.js",
+                "noUndefined.js",
+              ]
+            },
+            tex2jax: {
+              inlineMath: [ [","], ["\(", "\)"] ],
+              displayMath: [ ["$","$"] ],
+              processEscapes: true,
+            }
+          });
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">igarash1</a>
+            </div>
+            <nav>
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </nav>
+        </header>
+
+        <main role="main">
+            <h1>My Notes on AOJ 1</h1>
+            <article>
+    <header>
+        <em>
+            Published on December  8, 2019
+            <br>Last updated on December  9, 2020
+            
+            
+            </br>Tags: competitive-programming
+            
+        </em>
+    </header>
+    <section>
+        <h4 id="dark-room"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2709">2709 Dark Room</a></h4>
+<p>Since the input is an integer less than or equal to 20, we can consider the intervals <a href="-r%3C=i%3C=r">i,i+1</a>. Simulate moving the sun (circle) forward on the y-axis, keeping the maximum height of the building in each interval (use the tri-square theorem to get the y-coordinate of the sun at the last moment).</p>
+<h4 id="marked-ancestor"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2170">2170 Marked Ancestor</a></h4>
+<hr />
+<p>First, we reorder the vertices in the visitation order of the DFS to reduce them to 2*N one-dimensional columns A (in the example in question, A = {1, 2, 2, 4, 4, 2, 3, 3, 5, 5, 5, 6, 6, 6, 3, 1} ) (the method in the ant book Eulerian Tour) Where , id1[u] = the index of where node u first appeared in column A, id2[u] = index of the last place where node u appeared in column A, depth[u] = the depth of the node u, B[u] = Among the marked ancestors of node u, the <b>largest</b> node number in depth (initially all the B elements are 1) Then each operation can be reworded as follows M v: For B[u] (id1[v]&lt;=∀u&lt;=id2[v]), update B[u] with v if depth[u] &lt; depth[v] Q v: Add B[id1[v]] to your answer These operations can be computed in O(log N) using the lazy evaluation segment tree, and since DFS only takes O(N), the total can be computed in O((Q + N) log N). If you look ahead to the query, you can also use Union Find (the above is difficult to implement).</p>
+<h4 id="shopping"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1347">1347 Shopping</a></h4>
+<p>dp[i] = minimum distance traveled when going all the way from store 1 to store i DP as O(N^2).</p>
+<h4 id="for-the-peace"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2176">2176 For the Peace</a></h4>
+<p>Problem : A[i] = c<sub>i,1</sub>+…+c<sub>i,mi</sub>として, A[i] = c<sub>i,1</sub>+… +c<sub>i,mi</sub> as, For a given i, subtract c<sub>i,j</sub> from A[i] (j is a constant satisfying 1 &lt;= j &lt;= mi) Can all A[i] be set to 0 by repeating the operation max(A[i]) - min(A[i]) &lt;= D?</p>
+<hr />
+<p>A given operation can be divided into four cases: Op1. max(A[i]) - min(A[i]) &lt;= D Op1. reduce max(A[i]) and min(A[i]) Op2. max(A[i]) only reduces Op3. min(A[i]) only reduces Op4. max(A[i]) and min(A[i]) are unchanged In fact, when there are multiple operations that are possible in a state, the order in which they are performed is not relevant. For example, in state A[i], when the operations by Op1 and Op2 are possible, let A’‘[i] be the state of Op1 in A[i] and A’’‘[i] be the state of Op2 in A[i], then it is easy to prove that max(A’‘[i]) == max(A’’’[i]), with Op1 and Op2 Whichever one you do first, you can transition to the same state. In other words, to get all A[i] to zero, you only need to perform one of the operations that are possible in each state. Conversely, if there are no possible operations in a state, it is impossible to set all A[i] to zero. Finding possible operations can be done by O(n log n) using, for example, set, and the total computational complexity is O(M * n log n) (M = Σmi). In fact, we implemented the above operation in reverse (i.e., adding rather than subtracting), since the solutions are also equal.</p>
+<p>http://acm-icpc.aitea.net/index.php?plugin=attach&amp;refer=2009%2FPractice%2F%E6%A8%A1%E6%93%AC%E5%9C%B0%E5%8C%BA%E4%BA%88%E9%81%B8%2F%E8%AC%9B%E8%A9%95&amp;openfile=b.pdf:title=解説</p>
+<p>it seems that there are more creative ways to find possible operations.</p>
+<h4 id="starting-line"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2298">2298 Starting Line</a></h4>
+<hr />
+<p>Given the transitions going one meter at a time, it is clear that <b>if acceleration is possible at each point, then it is better to accelerate</b>, so we simulate O(L) while adopting a greedy strategy. Is the constraint a trick?</p>
+<h4 id="surface-area-of-cubes"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2723">2723 Surface Area of Cubes</a></h4>
+<hr />
+<p>Add and subtract the surface area while excluding blocks and count up. Subtract from the answer any adjacent blocks that are excluded. Note also the boundaries. O(N^2).</p>
+<h4 id="dictionary"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2534">2534 Dictionary</a></h4>
+<hr />
+<p>Make directed graphs in the order of alphabets that can be determined from a given input. For example, we plot an edge k’ -&gt; k if there is a relationship k &lt; k’ for characters k and k’. If the graph has no closed circuit, it can be said to be in lexicographic order, and closed circuits can be detected by DFS.</p>
+<h4 id="infinity-maze"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2320">2320 Infinity Maze</a></h4>
+<hr />
+<p>Since the number of states is only 4 * H * W at most, any move beyond 4 * H * W always includes a loop. Therefore, we only simulate O(HW).</p>
+<h4 id="eleven-lover"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2182">2182 Eleven Lover</a></h4>
+<hr />
+<p>dp[i][j] = 11 divided by the number such that the remainder is j, “S[k]…. S[i]”(1&lt;=k&lt;=i) as the total number of digits DP. Be careful not to count up those with the highest digit of 0.</p>
+<h4 id="dial-lock"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2157">2157 Dial Lock</a></h4>
+<hr />
+<p>First, we see that there is only a difference between the initial state and the target state. Then we see that we can find “the minimum number of operations for a sequence A[i] of length k consisting of numbers between 0 and 9, when we repeatedly add t (-9&lt;=t&lt;=9) to the consecutive intervals and set them all to 0 (mod 10)”. If we try to implement this operation in a straightforward manner, the number of states will be O(10^k) and we will not be able to find them in time. Let A[i] be A<a href="1%20%3C=%20l%20%3C=%20k">l</a>, then any sequence of operations with <b>A[l] as the left end of the interval is (an operation that sets A[l] to 0) + (A[l+1]). . The operation sequence for A[n]) </b>. For example, the operations adding a to [l,r] and adding b to [l, r’] (l &lt;= r &lt; r’ &lt;= k) are replaced by the operations adding a + b to [l, r] and b to [r + 1, r’] (!) We can also see that the operation of adding t (-9&lt;=t&lt;=-1) to the interval is replaced by the operation of adding 10 + t. Thus the left end of the column is replaced by the operation of adding b to [r + 1, r’] (!). Therefore, it is sufficient to find the minimum number of operations when we repeat only the operation that makes the left end of the column 0. Since there are O(k - l) operations to set A[l] to 0 and each operation takes O(k), the total computational cost is O(k! * k).</p>
+<p>The ↑ is [http://acm-icpc.aitea.net/index.php?plugin=attach&amp;refer=2009%2FPractice%2F%E5%A4%8F%E5%90%88%E5%AE%BF%2F%E8%AC%9B%E8%A9%95&amp; openfile=2c.pdf:title=explanation]As is.</p>
+<p>As a result, I didn’t care about the differences. At first I thought of enumerating all of the states, but the number of states does not fall from O(10^k), so it was useless.</p>
+    </section>
+    <section>
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://igarash1.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        Copy
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </footer>
+    </body>
+</html>
