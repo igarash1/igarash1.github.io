@@ -1,16 +1,21 @@
 <article>
-    <section class="header">
-        Posted on $date$
-        $if(author)$
-            by $author$
-        $endif$
-    </section>
+    <header>
+        <em>
+            Published on $date$
+            <br>Last updated on $updateDate$
+            $if(author)$
+            <br>Author: $author$
+            $endif$
+            $if(tags)$
+            </br>Tags: <span class="tags">$tags$</span>
+            $endif$
+        </em>
+    </header>
     <section>
         $body$
     </section>
     <section>
         <div id="disqus_thread"></div>
-
         <script>
             /**
              *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.

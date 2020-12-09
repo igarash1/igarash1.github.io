@@ -25,3 +25,13 @@ cabal.project.local~
 _cache/
 
 _site/
+
+gh-pages
+
+gh-pages.pub
+
+stack.yaml
+
+stack.yaml.lock
+
+.idea/
