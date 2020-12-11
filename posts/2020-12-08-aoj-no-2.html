@@ -60,48 +60,70 @@
             </em>
     </header>
     <section>
-        <h4 id="convexcut"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2442">2442 ConvexCut</a></h4>
+        <p><i>This article was translated from <a href="https://igarash1-sol.hatenablog.com/">my Japanese blog</a>.</i></p>
 <hr />
-<p>Assuming that there exists a point P whose area is bisected for a given line, a line parallel to the x- and y-axes passing through the point is also bisected. As can be seen from [https://igarash1-sol.hatenablog.com/entry/2018/06/24/172358:title=多角形の面積の公式], we also know that for every vertex there is a point P that is point-symmetric. Conversely, if such a point P exists, then any line passing through it will bisect its area. After all, we only need to check if each vertex pair is point-symmetric with respect to the same point. Since the constraints are loose, it is possible to solve the problem by just checking O(N^4) and so on.</p>
+<h4 id="convexcut"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2442">2442 ConvexCut</a></h4>
+<p>Assuming that there exists a point P which the area is bisected for any lines on, a line parallel to the x-axis and y-axes passing through the point can also bisect the area. We also know that for every vertex there is another vertex that is point-symmetric to it. Conversely, if such a point P exists, then any line passing through it will bisect its area. After all, we only need to check if each vertex pair is point-symmetric with respect to the same point. Since the constraints are not tight, it’s possible to solve the problem by just iterating over points in O(N^4).</p>
 <h4 id="king-slime"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2382">2382 King Slime</a></h4>
 <hr />
-<p>If you follow the course backward from the King Slime, it is easy to see that the slime can only stay at the initial point of each slime or at the wall. Then, you can see that it is better to attach the same slime on the x- or y-axis if it is present. It is shown that if the slimes are attached in this way, there will be only one slime in each x- and y-coordinate at most, and the slimes will be arranged in a diagonal line. It is best to combine the slimes in this state by moving them to the wall. Since the wall has four directions, we find the minimum number of moves in each case. In some cases, it is not necessary to drive the slime to the corner. Since the order of these cases is also relevant, it is better to treat them as a connected component of the graph, which is easier to do using Union Find. The computational complexity is O(N * Ack(N) + W + H).</p>
-<h4 id="there-is-no-alternative"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1350">1350 There is No Alternative</a></h4>
+<p>If you go backward from the point where it becomes the King Slime, it is easy to see that the slime can only stay at the initial point of each slime or at the wall. If other slimes exit on the x-axis or y-axis, it is better to connect the slimes to them. If the slimes are connected in this way, there will be at most one slime in each x-coordinate and y-coordinate, and the slimes will be arranged like a diagonal line. Finally, it’s best to connect the slimes by moving them to the wall. Since there are 4 walls, we need to find the minimum number of moves in each wall. In some cases, you aren’t necessary to drive the slime to the corner (it was a little bothersome). Since the order of these cases also matters, it is better to treat them as connected components of a undirected graph. You can use Union Find in this time. The runtime complexity is O(N * Ack(N) + W + H).</p>
 <hr />
-<p>Try to build MST with the graph without each edge, and if you can’t build MST or the sum of the MST edges is greater than the original MST (if you don’t exclude any edges), then you can figure out that the edge is No Alternative Bridge. However, this means that the computational complexity is O(number of edges) * O(computational complexity of the MST) and we cannot make it in time. If we realize that there is always an edge common to all MSTs, we find that we need only O(N) edges to examine. In the end, we can solve for O(N * E log N).</p>
+<h4 id="there-is-no-alternative"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1350">1350 There is No Alternative</a></h4>
+<p>Build MST with the graph without each edge, and if you can’t build MST or the sum of the MST edges is greater than the original MST (the case you don’t exclude any edges), then you can determine that the edge is No Alternative Bridge. However, the runtime complexity of this solution is O(number of edges) * O(runtime complexity of the MST) and we cannot make it in time. As you notice any two MSTs have many common edges, we have only O(N) edges to examine. In the end, we can solve for O(N * E log N).</p>
 <h4 id="marathon-match"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2303">2303 Marathon Match</a></h4>
 <hr />
-<p>P[i][j] := the probability that player i will rest j times, G[i][t] := the probability that player i will score a goal at time t, W[i][t] := the probability that player i will win at time t, Tij := L/V[i] + j * T[i] (the time it takes for athlete i to rest and finish j times) And then, G[i][t] = Σ_{j} P[i][j] (t = Tij), W[i][t] = G[i][t] * (1 - Σ_{k ! = i, t’ &lt;= t}G[k][t’]) and the probability that athlete i will win is ΣW[i][t]. The time to finish may not be an integer, but since the time depends only on the speed of the player and the number of rest periods (and rest periods) of the player, G and W can be calculated simultaneously and solved by O(N<sup>2M</sup>2). In cout, I got WA in the output format, so I ended up using printf to specify the number of digits.</p>
+<p>Let’s define some variables as follows:</p>
+<ul>
+<li>P[i][j] := the probability that player i will rest j times,</li>
+<li>G[i][t] := the probability that player i will reach the goal at time t,</li>
+<li>W[i][t] := the probability that player i will win at time t,</li>
+<li><span class="math inline"><em>T</em><sub><em>i</em><em>j</em></sub></span> := L/V[i] + j * T[i] (the time it takes for athlete i to finish, taking a rest j times)</li>
+</ul>
+<p>And then,</p>
+<ul>
+<li>G[i][t] = Σ_{j} P[i][j] (t = Tij),</li>
+<li>W[i][t] = G[i][t] * (1 - Σ_{k ! = i, t’ &lt;= t}G[k][t’])</li>
+</ul>
+<p>and the probability that athlete i will win will be ΣW[i][t]. The time to finish may not be an integer, but the time depends only on the speed of the player and the number of rest periods (and rest periods) of the player, G and W can be calculated simultaneously and solved in O(N<sup>2M</sup>2). At first, I used <code>std::cout</code> but I got WA by the output format error. Although I ended up using <code>printf</code> to specify the number of digits, maybe we could use <code>std:cout</code> (I didn’t come up…)</p>
+<hr />
 <h4 id="invisible"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2741">2741 Invisible</a></h4>
-<p>Passing the turn removes all the cards from the stack, so the stack is never filled with cards from the same player in succession, but rather with cards from Player 1 and Player 2 in turn. Thus, given the number of cards remaining in each player’s deck and the information of the last player who placed a card on the stack, the cards in the stack, including their order, are known (and can be recovered). Since the number of states is of the order O(n * m * (n + m) * 4), it can be solved by a memorized recursive search.</p>
+<p>Passing the turn removes all the cards from the stack, so the stack is never placed with cards from the same player in a row and placed from Player 1 and Player 2 in turn.. Thus, with the number of cards remaining in each player’s deck and the information of the last player who placed a card on the stack, the cards in the stack can be reconstructed, including their order. Since the number of states is O(n * m * (n + m) * 4), you can solve it by memoization or dynamic programming.</p>
+<hr />
 <h4 id="reverse-roads"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2304">2304 Reverse Roads</a></h4>
+<p>Since we never use two opposite edges in the maximum flow (since they cancel each other out, there is no such increase path in both directions at the same time). , find the maximum flow in the original graph with the opposite edges (or, alternatively, we can think of it as an undirected graph), and check if the opposite edges are used in the maximum flow obtained.</p>
 <hr />
-<p>Since we never use two opposite sides of the maximum flow (since they cancel each other out, there is no such increase path in both directions at the same time), we find the maximum flow in the original graph plus the opposite side (or, alternatively, we can think of it as an undirected graph), and check the opposite side used in the maximum flow obtained.</p>
 <h4 id="a-holiday-of-miss-brute-force"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2425">2425 A Holiday of Miss Brute Force</a></h4>
+<p>Since the instructions of the sister depend only on the remainder of the coordinates and elapsed time divided by 6, the number of states can be reduced to O(lx * ly * 6). We will find the shortest path on the graph with the states as nodes and the number of times the sister will be ignored as the cost. Note that the instructions also depends on the parity of x-coordinates. The total runtime complexity is O(N log N) (where N = lx * ly).</p>
 <hr />
-<p>Since the instructions of the sister depend only on the remainder of the coordinate and elapsed time divided by 6, the number of states can be reduced to about O(lx * ly * 6). We then find the shortest path on the graph with the states as nodes and the number of times the sister is ignored as the cost. Note that even oddities of x-coordinates can change the transition destination. The computational complexity is O(N log N) (N = lx * ly).</p>
 <h4 id="rectangular-stamps"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2297">2297 Rectangular Stamps</a></h4>
+<p>Notice that the part of the picture that was last stamped can be stamped with any previous stamps, the number of possibilities is only O(2^16) if we consider any part of the picture. The minimum number of stamps required to complete a state of cells is determined by the minimum number of stamps required to complete the state before each stamped square of the state as a corner, we can get a recurrence and compute it by DP. For each state, we need to press each square with one of the four corners of each stamp, so the runtime complexity is O(2^16 * N * 4 * 4). After I used memoization and got TLE, I switched to DP and got AC.</p>
 <hr />
-<p>Noting that the part of the picture that was last stamped can be stamped with any previous stamp, the number of states is only O(2^16) if we consider any part of the picture as a state. The minimum number of stamps required to complete a state is determined by the minimum number of stamps required to complete the state before (each) stamped square of the state as a corner, so that a gradualization formula can be formulated and DP can be obtained. For each state, we need to press each square with one of the four corners of each stamp, so the computational complexity is about O(2^16 * N * 4 * 4). For memorized recursion, you can TLE it.</p>
 <h4 id="map-of-ninja-house"><a href="https://onlinejudge.u-aizu.ac.jp/problems/1236">1236 Map of Ninja House</a></h4>
+<p>The probelm is in short, “Given a preorder traversal in a graph, so reconstruct the graph.” Easy problem. You can solve it by both O(V + E) DFS and O(V^2) DFS. In some cases, there are several possible rooms that have already been passed through such that the distance from the first room is the same, so be careful to connect the room with the one that has more vacancy in the number of doors.</p>
 <hr />
-<p>You are given information about the graphs in historical order and are asked to reconstruct the graphs. A reading problem. A DFS can pass both O(V + E) and O(V^2). In some cases, there are several possible rooms that have already been passed through such that the distance from the first room is the same, so be careful to connect the room with the one that has a vacancy in the number of doors.</p>
 <h4 id="a-light-road"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2342">2342 A Light Road</a></h4>
+<p>Considering the number of mirrors P and Q in each square and the direction from which the square was reached, we can see that the square does not return to its own state (in the graph, the state is DAG). Therefore, it is sufficient to ignore the path and perform DP considering only that states, and the runtime complexity is O(A^2 * 4 * NM).</p>
 <hr />
-<p>Considering the number of mirrors P and Q in each square and the direction from which the square was reached, we can see that the square does not return to its own state (in the graph, the state is DAG). Therefore, it is sufficient to ignore the path and perform DP considering only that state, and the computational complexity is O(A^2 * 4 * NM).</p>
 <h4 id="cookie-counter"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2595">2595 Cookie Counter</a></h4>
+<p>Let’s define:</p>
+<ul>
+<li>f(d, c) = In d days, the total number of ways to eat more than 1 cookie a day and eat c cookies in total (including the order),</li>
+</ul>
+<p>We can then compute <span class="math inline"><em>f</em>(<em>i</em>, <em>N</em>) * <em>D</em><sub><em>C</em><sub><em>i</em></sub></sub></span> for each i (<span class="math inline"><em>i</em> ≤ <em>m</em><em>i</em><em>n</em>(<em>D</em>, <em>N</em>)</span>).</p>
 <hr />
-<p>As f(d, c) = d the total number of ways to eat more than 1 cookie a day in a day and total number of ways to eat c cookies in a day (including the order), we can then compute f(i,N) * <sub>D</sub>C<sub>i</sub> in the possible i (&lt;= min(D, N) ).</p>
 <h4 id="curtain"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2747">2342 Curtain</a></h4>
+<p>Since the window edge is either parallel to the x-axis or parallel to the y-axis, and the curtain is given counterclockwise, the left sides of the window (the side that goes from the negative x-axis edge to the inside of the polygon) and the right sides of the window (the side that goes from the positive x-axis edge to the inside of the polygon) can be determined by the y-corrdinates(up or down). By moving the left and right sides in and out of the polygon and sweeping the plane along the x-axis, the area of the window that is not covered by the curtain can be calculated. Cutting all the perpendicular edges by the y-coordinates of given vertices beforehand makes the implementation easier as the rectangles that emerge during sweeping the plane are either all covered by the curtain or do not overlap entirely. The runtime complexity is now O(N^2). <a href="https://www.spoj.com/problems/WINDOW1/">SPOJ WINDOW1</a> is a similar looking problem, and it can actually be solved with the same sweep line method in amortized O(N^2)). The official solution is to compress the coordinate system and look at each square with O(N^3), which is far easier to implement and very clever.</p>
 <hr />
-<p>Since the window edge is either parallel to the x-axis or parallel to the y-axis, and the curtain is given counterclockwise, the left side of the window above and below the y-coordinate (the side that goes beyond the negative x-axis edge to the inside of the polygon) and the right side of the window (the side that goes beyond the positive x-axis edge to the inside of the polygon) are found. By moving the left and right sides in and out of the polygon and scanning the plane along the x-axis, the area of the window that is not covered by the curtain is found. Cutting all the (perpendicular) edges in the y-coordinate beforehand makes the implementation easier as the rectangles that emerge during the plane scan are either all covered by the curtain or do not overlap. The computational complexity is now O(N^2) ([https://www.spoj.com/problems/WINDOW1/:title=SPOJ WINDOW1] is a similar looking problem, but it can actually be solved with the same planar scan and amortization O(N^2)). . The assumed solution is to compress the coordinate system and look at each square with O(N^3), which is far easier to implement. It seems that [https://igarash1-sol.hatenablog.com/entry/2018/06/24/172358:title=多角形の面積を求めるアルゴリズム] can handle the unevenness of the solution in O(N) well.</p>
 <h4 id="ai"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2643">2643 AI</a></h4>
+<p>Parsing. Be careful about infinite loops and recursions.</p>
 <hr />
-<p>Parsing. Be careful about infinite loop or recursions while parsing.</p>
 <h4 id="similarity-of-subtrees"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2784">2784 Similarity of Subtrees</a></h4>
-<hr />
 <p>TODO.</p>
 <h4 id="identity-function"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2720">2720 Identity Function</a></h4>
+<hr />
+<p>TODO.</p>
+<h4 id="black-company"><a href="https://onlinejudge.u-aizu.ac.jp/problems/2726">2726 Black Company</a></h4>
+<hr />
 <p>TODO.</p>
 <h4 id="floating-point-numbers"><a href="https://onlinejudge.u-aizu.ac.jp/problems/1628">2726 Floating-Point Numbers</a></h4>
 <hr />
