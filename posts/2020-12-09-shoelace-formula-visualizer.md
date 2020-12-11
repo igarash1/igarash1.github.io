@@ -4,6 +4,10 @@ editedDate: 2020/12/7
 tags: computer-science, math
 ---
 
+This visualizer may help you understand [Shoelace Formula](https://en.wikipedia.org/wiki/Shoelace_formula)!
+Choose the vertices of polygon and click `Vizualize`!
+You can understand the area calculation in 2 ways - by triangle and by trapezoid. Select from the pull-down menu. 
+
 <style>
     .unselectable {
         -moz-user-select: -moz-none;
