@@ -1,12 +1,49 @@
 ---
-title: Visualizing Shoelace Formula!
+title: Visualizing Shoelace Formula, the formula for area of polygons.
 editedDate: 2020/12/7
 tags: computer-science, math
 ---
 
-This visualizer may help you understand [Shoelace Formula](https://en.wikipedia.org/wiki/Shoelace_formula)!
-Choose the vertices of polygon and click `Vizualize`!
-You can understand the area calculation in 2 ways - by triangle and by trapezoid. Select from the pull-down menu. 
+I found some people are getting stuck with understanding the [Shoelace Formula](https://en.wikipedia.org/wiki/Shoelace_formula),
+which is the area formula for polygons including irregular ones.
+
+In this article, I would like to try to explain the formula intuitively using the visualizer I made.
+
+To note first, we assume 
+
+- we consider only polygons in 2D. 
+- the edges of polygon are not self-intersecting.
+- the number of vertices of polygon is $n$.
+- the coordinates of the vertices are $P_1(x_1, y_1)$, ..., $P_2(x_n, y_n), P_{n+1}(x_{n+1}, y_{n+1})$, where $Px_{n+1} = x_{1}, y_{n+1} = y_{1}$ for simplicity.
+
+then, we can calculate the area of polygon $S$ by the great Shoelace formula:
+$$ S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} y_{i + 1} - x_{i + 1} y_{i}) $$
+The most difficult part of understanding this is the fact that the term inside the sigma can be negative,
+which enables us to calculate areas of irregular polygons.
+As [the Wikipedia](https://en.wikipedia.org/wiki/Shoelace_formula#Examples) explains it well, 
+you can interpret the term as the *signed * area of triangle $\bigtriangleup OP_{i}P_{i+1}$.
+By the way, you can understand the formula in another way - to interpret it as the sum of trapezoids.
+Let me explain this a little. 
+By doing some high school math, 
+the above equation can be transformed into the sum of trapezoids as below:
+$$
+S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} - x_{i + 1})(y_{i} + y_{i + 1})
+$$
+*The term inside the sigma corresponds to the signed area of trapezoid consisting of
+  $(x_i, 0)$, $(x_{i+1}, 0)$, $P_{i+1}$, $P_i$*
+
+![](../images/bytrapezoid.png)
+
+I assume you know [the area formula for trapezoids](https://en.wikipedia.org/wiki/Trapezoid#Area) :)
+
+Anyway, I made the visualizer to help people understand the area calculation, so please try this. 
+I hope this may help you understand the formula more intuitively.
+
+### Usage
+Choose the vertices of polygon and click `Visualize!`.
+You can understand the area calculation in 2 ways as I explained - in the triangle way and in the trapezoid way.
+Select `Triangle` or `Trapezoid` from the pull-down menu.
+Also, the coordinates of vertices will be shown in the left side area.
 
 <style>
     .unselectable {
@@ -17,7 +54,7 @@ You can understand the area calculation in 2 ways - by triangle and by trapezoid
         user-select: none;
     }
 </style>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="../js/viz.js"></script>
 <div style="float:left"> <input type="button" value="Reset" onclick="resetPoints()"/>
     <br>
@@ -34,11 +71,10 @@ You can understand the area calculation in 2 ways - by triangle and by trapezoid
                   value="1"
                   cols="10"
                   rows=20
-                  placeholder="Coordinates displayed here."></textarea>
+                  placeholder="Coordinates displayed here." readonly></textarea>
     </form>
 </div>
-<div  id="svgCanvas" style="float:left; margin-left:20px; unselectable="on" class="unselectable">
+<div id="svgCanvas" style="float:left; margin-left:20px; unselectable="on" class="unselectable">
 <p><span style="background:dodgerblue;opacity:0.5;">blue</span> : <strong>+</strong>positive area, <span style="background:indianred;opacity:0.5;">red</span> : <strong>-</strong>negative area</p>
-<div"></div>
+<p><strong><i>The points of polygon should be in anticlockwise order.</i></strong></p>
 </div>
-
