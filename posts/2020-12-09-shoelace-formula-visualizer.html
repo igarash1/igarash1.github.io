@@ -63,7 +63,7 @@
 <li>we consider only polygons in 2D.</li>
 <li>the edges of polygon are not self-intersecting.</li>
 <li>the number of vertices of polygon is <span class="math inline"><em>n</em></span>.</li>
-<li>the coordinates of the vertices are <span class="math inline"><em>P</em><sub>1</sub>(<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>)</span>, …, <span class="math inline"><em>P</em><sub>2</sub>(<em>x</em><sub><em>n</em></sub>, <em>y</em><sub><em>n</em></sub>), <em>P</em><sub><em>n</em> + 1</sub>(<em>x</em><sub><em>n</em> + 1</sub>, <em>y</em><sub><em>n</em> + 1</sub>)</span>, where <span class="math inline"><em>P</em><em>x</em><sub><em>n</em> + 1</sub> = <em>x</em><sub>1</sub>, <em>y</em><sub><em>n</em> + 1</sub> = <em>y</em><sub>1</sub></span> for simplicity.</li>
+<li>the coordinates of the vertices are in counter-clockwise order and represented as <span class="math inline"><em>P</em><sub>1</sub>(<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>)</span>, …, <span class="math inline"><em>P</em><sub>2</sub>(<em>x</em><sub><em>n</em></sub>, <em>y</em><sub><em>n</em></sub>), <em>P</em><sub><em>n</em> + 1</sub>(<em>x</em><sub><em>n</em> + 1</sub>, <em>y</em><sub><em>n</em> + 1</sub>)</span>, where <span class="math inline"><em>P</em><em>x</em><sub><em>n</em> + 1</sub> = <em>x</em><sub>1</sub>, <em>y</em><sub><em>n</em> + 1</sub> = <em>y</em><sub>1</sub></span> for simplicity.</li>
 </ul>
 <p>then, we can calculate the area of polygon <span class="math inline"><em>S</em></span> by the great Shoelace formula: <span class="math display">$$ S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} y_{i + 1} - x_{i + 1} y_{i}) $$</span> The most difficult part of understanding this is the fact that the term inside the sigma can be negative, which enables us to calculate areas of irregular polygons. As <a href="https://en.wikipedia.org/wiki/Shoelace_formula#Examples">the Wikipedia</a> explains it well, you can interpret the term as the <em>signed </em> area of triangle <span class="math inline"> △ <em>O</em><em>P</em><sub><em>i</em></sub><em>P</em><sub><em>i</em> + 1</sub></span>. By the way, you can understand the formula in another way - to interpret it as the sum of trapezoids. Let me explain this a little. By doing some high school math, the above equation can be transformed into the sum of trapezoids as below: <span class="math display">$$
 S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} - x_{i + 1})(y_{i} + y_{i + 1})
@@ -95,7 +95,7 @@ Points:
 </div>
 <div id="svgCanvas" style="float:left; margin-left:20px; unselectable=" on" class="unselectable">
 <p><span style="background:dodgerblue;opacity:0.5;">blue</span> : <strong>+</strong>positive area, <span style="background:indianred;opacity:0.5;">red</span> : <strong>-</strong>negative area</p>
-<p><strong><i>The points of polygon should be in anticlockwise order.</i></strong></p>
+<p><strong><i>The points of polygon should be in counter-clockwise order.</i></strong></p>
 </div>
     </section>
     <section>
