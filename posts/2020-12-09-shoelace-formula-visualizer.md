@@ -14,7 +14,7 @@ To note first, we assume
 - we consider only polygons in 2D. 
 - the edges of polygon are not self-intersecting.
 - the number of vertices of polygon is $n$.
-- the coordinates of the vertices are $P_1(x_1, y_1)$, ..., $P_2(x_n, y_n), P_{n+1}(x_{n+1}, y_{n+1})$, where $Px_{n+1} = x_{1}, y_{n+1} = y_{1}$ for simplicity.
+- the coordinates of the vertices are in counter-clockwise order and represented as $P_1(x_1, y_1)$, ..., $P_2(x_n, y_n), P_{n+1}(x_{n+1}, y_{n+1})$, where $Px_{n+1} = x_{1}, y_{n+1} = y_{1}$ for simplicity.
 
 then, we can calculate the area of polygon $S$ by the great Shoelace formula:
 $$ S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} y_{i + 1} - x_{i + 1} y_{i}) $$
@@ -76,5 +76,5 @@ Also, the coordinates of vertices will be shown in the left side area.
 </div>
 <div id="svgCanvas" style="float:left; margin-left:20px; unselectable="on" class="unselectable">
 <p><span style="background:dodgerblue;opacity:0.5;">blue</span> : <strong>+</strong>positive area, <span style="background:indianred;opacity:0.5;">red</span> : <strong>-</strong>negative area</p>
-<p><strong><i>The points of polygon should be in anticlockwise order.</i></strong></p>
+<p><strong><i>The points of polygon should be in counter-clockwise order.</i></strong></p>
 </div>
