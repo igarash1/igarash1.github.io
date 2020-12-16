@@ -1,5 +1,5 @@
 ---
-title: Visualizing Shoelace Formula, the formula for area of polygons.
+title: Visualizing Shoelace Formula, the formula for area of polygons
 editedDate: 2020/12/7
 tags: computer-science, math
 ---
@@ -36,8 +36,12 @@ $$
 
 I assume you know [the area formula for trapezoids](https://en.wikipedia.org/wiki/Trapezoid#Area) :)
 
-Anyway, I made the visualizer to help people understand the area calculation, so please try this. 
+Anyway, I made the visualizer with JS to help people understand the area calculation, so please try this. 
 I hope this may help you understand the formula more intuitively.
+
+### Source
+
+You can check the JS source and example html [here (link to gist)](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac).
 
 ### Usage
 Choose the vertices of polygon and click `Visualize!`.
