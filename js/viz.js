@@ -229,18 +229,16 @@ function visualize() {
     for (let i = 0; i < numOfVertices; i++) {
         if (vizByTriangle) {
             // triangle
-            let tri = []
-            tri.push({"x": 0, "y": 0});
-            tri.push({"x": poly[i].x, "y": poly[i].y});
-            tri.push({"x": poly[(i + 1) % numOfVertices].x, "y": poly[(i + 1) % numOfVertices].y});
+            const tri = [ makePointPair(0, 0),
+                makePointPair(poly[i].x, poly[i].y),
+                makePointPair(poly[(i + 1) % numOfVertices].x, poly[(i + 1) % numOfVertices].y)]
             drawTriangle(tri, delayUnit * i)
         } else {
             // trapezoid
-            let tra = []
-            tra.push(makePointPair(poly[i].x,  0));
-            tra.push(makePointPair(poly[(i + 1) % numOfVertices].x, 0));
-            tra.push(makePointPair(poly[(i + 1) % numOfVertices].x, poly[(i + 1) % numOfVertices].y));
-            tra.push(makePointPair(poly[i].x, poly[i].y));
+            const tra = [ makePointPair(poly[i].x,  0),
+                makePointPair(poly[(i + 1) % numOfVertices].x, 0),
+                makePointPair(poly[(i + 1) % numOfVertices].x, poly[(i + 1) % numOfVertices].y),
+                makePointPair(poly[i].x, poly[i].y) ]
             drawTrapezoid(tra, delayUnit * i)
         }
     }
@@ -249,7 +247,7 @@ function visualize() {
     }, delayUnit * poly.length))
 }
 
-function appendPolygon(polygon, area) {
+function svgAppendPolygon(polygon, area) {
     svg.append("polygon")
         .data([polygon])
         .style("fill", areaColor(area))
@@ -263,14 +261,14 @@ function appendPolygon(polygon, area) {
 
 function drawTrapezoid(tra, delay) {
     const area = (tra[2].y + tra[3].y) * (tra[0].x - tra[1].x) / 2
-    timeouts.push(setTimeout( () => { appendPolygon(tra, area) }, delay))
+    timeouts.push(setTimeout( () => { svgAppendPolygon(tra, area) }, delay))
 }
 
 function drawTriangle(tri, delay) {
     const x1 = tri[1].x - tri[0].x, y1 = tri[1].y - tri[0].y
     const x2 = tri[2].x - tri[0].x, y2 = tri[2].y - tri[0].y
     const area = (x1 * y2 - x2 * y1) / 2
-    timeouts.push(setTimeout( () => { appendPolygon(tri, area) }, delay))
+    timeouts.push(setTimeout( () => { svgAppendPolygon(tri, area) }, delay))
 }
 
 function drawVertex(point) {
