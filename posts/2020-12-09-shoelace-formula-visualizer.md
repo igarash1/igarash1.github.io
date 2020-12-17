@@ -32,7 +32,7 @@ $$
 *The term inside the sigma corresponds to the signed area of trapezoid consisting of
   $(x_i, 0)$, $(x_{i+1}, 0)$, $P_{i+1}$, $P_i$*
 
-![](../images/bytrapezoid.png)
+![bytrapezoid.jpg](../images/bytrapezoid.png)
 
 I assume you know [the area formula for trapezoids](https://en.wikipedia.org/wiki/Trapezoid#Area) :)
 
