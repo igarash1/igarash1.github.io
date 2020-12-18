@@ -24,10 +24,19 @@ As [the Wikipedia](https://en.wikipedia.org/wiki/Shoelace_formula#Examples) expl
 you can interpret the term as the *signed * area of triangle $\bigtriangleup OP_{i}P_{i+1}$.
 By the way, you can understand the formula in another way - to interpret it as the sum of trapezoids.
 Let me explain this a little. 
-By doing some high school math, 
-the above equation can be transformed into the sum of trapezoids as below:
+<div class="proposition">
+The above equation (Shorlace Formula) can be transformed into the sum of trapezoids as below:
 $$
 S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} - x_{i + 1})(y_{i} + y_{i + 1})
+$$
+</div>
+<em>Proof.</em>
+$$
+\begin{align}&{} \sum_{k = 1}^{N} \frac {1}{2} (y_k+y_{k+1})(x_k - x_{k+1}) \\
+&=\frac {1}{2} \sum_{k = 1}^{N} (x_ky_{k+1}- x_{k+1}y_k + x_ky_k - x_{k+1}y_{k+1}) \\
+&=\frac {1}{2} \sum_{k = 1}^{N} (x_ky_{k+1}- x_{k+1}y_k) + \frac{1}{2}\sum_{k = 1}^{N}( x_ky_k - x_{k+1}y_{k+1}) \\
+&=\frac {1}{2} \sum_{k = 1}^{N} (x_ky_{k+1}- x_{k+1}y_k)
+\end{align}
 $$
 *The term inside the sigma corresponds to the signed area of trapezoid consisting of
   $(x_i, 0)$, $(x_{i+1}, 0)$, $P_{i+1}$, $P_i$*
@@ -35,17 +44,18 @@ $$
 ![bytrapezoid.jpg](../images/bytrapezoid.png)
 
 I assume you know [the area formula for trapezoids](https://en.wikipedia.org/wiki/Trapezoid#Area) :)
+Also, we can see the formula also works correctly with negative coordinates.
 
-Anyway, I made the visualizer with JS to help people understand the area calculation, so please try this. 
+Anyway, I made the visualizer with JS to help you understand the area calculation, so please try this. 
 I hope this may help you understand the formula more intuitively.
 
 ### Source
 
-You can check the JS source and example html [here (link to gist)](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac).
+You can check the JS source and an example html [here (link to Gist)](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac).
 
 ### Usage
 Choose the vertices of polygon and click `Visualize!`.
-You can understand the area calculation in 2 ways as I explained - in the triangle way and in the trapezoid way.
+You can understand the area calculation in 2 ways as I explained - in the triangle way and the trapezoid way.
 Select `Triangle` or `Trapezoid` from the pull-down menu.
 Also, the coordinates of vertices will be shown in the left side area.
 
