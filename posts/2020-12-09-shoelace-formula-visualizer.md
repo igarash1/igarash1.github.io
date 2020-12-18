@@ -51,7 +51,7 @@ I hope this may help you understand the formula more intuitively.
 
 ### Source
 
-You can check the JS source and an example html [here (link to Gist)](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac).
+You can check my JS source and an example html on [Gist](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac) or [JSFiddle](https://jsfiddle.net/igarash1/8j56kcy7/2/).
 
 ### Usage
 Choose the vertices of polygon and click `Visualize!`.
