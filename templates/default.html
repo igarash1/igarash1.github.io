@@ -5,7 +5,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>igarash1</title>
-        <link rel="stylesheet" href="/css/default.css" />
         <script type="text/x-mathjax-config">
           MathJax.Hub.Config({
             extensions: [
@@ -26,11 +25,11 @@
             }
           });
         </script>
-        <script id="MathJax-script" async
-                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" />
+        <link rel="stylesheet" href="/css/default.css" />
     </head>
     <body>
+    <div class="wrapper">
         <header>
             <div class="logo">
                 <a href="/">igarash1</a>
@@ -41,7 +40,6 @@
                 <a href="/archive.html">Archive</a>
             </nav>
         </header>
-
         <main role="main">
             <h1>$title$</h1>
             $body$
@@ -55,5 +53,6 @@
             / Last updated on $updateDate$.
             $endif$
         </footer>
+    </div>
     </body>
 </html>

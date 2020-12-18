@@ -5,12 +5,6 @@ html {
   font-size: 62.5%;
 }
 
-body {
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 1.6rem;
-    color: #000;
-}
-
 header {
   border-bottom: 0.2rem solid #000;
 }
@@ -54,11 +48,10 @@ article .header {
   color: #555;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.responsive {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
 }
 
 .logo a {
@@ -127,7 +120,7 @@ article .header {
 
 @media (min-width: 640px) {
   body {
-    width: 60rem;
+    /*width: 800px;*/
     margin: 0 auto;
     padding: 0;
   }
@@ -210,4 +203,21 @@ article .header {
   content: "Definition.";
   font-weight: bold;
   font-style: italic;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.6rem;
+  background: #e8e8e8;
+  color: #222;
+  padding: 40px 5px;
+}
+
+.wrapper {
+  background: #f7f7f7;
+  color: black;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.125);
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 720px;
 }
