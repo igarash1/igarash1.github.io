@@ -14,7 +14,7 @@ To note first, we assume
 - we consider only polygons in 2D. 
 - the edges of polygon are not self-intersecting.
 - the number of vertices of polygon is $n$.
-- the coordinates of the vertices are in counter-clockwise order and represented as $P_1(x_1, y_1)$, ..., $P_2(x_n, y_n), P_{n+1}(x_{n+1}, y_{n+1})$, where $Px_{n+1} = x_{1}, y_{n+1} = y_{1}$ for simplicity.
+- the coordinates of the vertices are in counter-clockwise order and represented as $P_1(x_1, y_1)$, ..., $P_2(x_n, y_n), P_{n+1}(x_{n+1}, y_{n+1})$, where $x_{n+1} = x_{1}, y_{n+1} = y_{1}$ for simplicity.
 
 then, we can calculate the area of polygon $S$ by the great Shoelace formula:
 $$ S = \sum_{i = 1}^{n} \frac{1}{2}(x_{i} y_{i + 1} - x_{i + 1} y_{i}) $$
@@ -38,10 +38,10 @@ $$
 &=\frac {1}{2} \sum_{k = 1}^{N} (x_ky_{k+1}- x_{k+1}y_k)
 \end{align}
 $$
-*The term inside the sigma corresponds to the signed area of trapezoid consisting of
+*The term inside the sigma corresponds to a signed area of trapezoid consisting of
   $(x_i, 0)$, $(x_{i+1}, 0)$, $P_{i+1}$, $P_i$*
 
-![bytrapezoid.jpg](../images/bytrapezoid.png)
+![](../images/bytrapezoid.png)
 
 I assume you know [the area formula for trapezoids](https://en.wikipedia.org/wiki/Trapezoid#Area) :)
 Also, we can see the formula also works correctly with negative coordinates.
