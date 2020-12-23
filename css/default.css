@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-  
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:wght@400;500&');
+
 
 html {
   font-size: 62.5%;
@@ -13,8 +13,13 @@ nav {
   text-align: right;
 }
 
+img[src*='#center'] {
+  display: block;
+  margin: auto;
+}
+
 nav a {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: black;
   text-decoration: none;
@@ -30,11 +35,11 @@ footer {
 }
 
 h1 {
-  font-size: 2.4rem;
+  font-size: 2.5rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   /* clear: both; */
 }
 
@@ -46,6 +51,10 @@ article .header {
   font-size: 1.4rem;
   font-style: italic;
   color: #555;
+}
+
+.post-list li {
+  font-size: 2.0rem;
 }
 
 .responsive {
@@ -206,8 +215,8 @@ article .header {
 }
 
 body {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 1.6rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 2.0rem;
   background: #e8e8e8;
   color: #222;
   padding: 40px 5px;

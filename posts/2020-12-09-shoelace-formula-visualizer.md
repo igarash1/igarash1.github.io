@@ -41,7 +41,7 @@ $$
 *The term inside the sigma corresponds to a signed area of trapezoid consisting of
   $(x_i, 0)$, $(x_{i+1}, 0)$, $P_{i+1}$, $P_i$*
 
-![](../images/bytrapezoid.png)
+![](../images/bytrapezoid.png#center)
 
 I assume you know [the area formula for trapezoids](https://en.wikipedia.org/wiki/Trapezoid#Area) :)
 Also, we can see the formula also works correctly with negative coordinates.
@@ -51,13 +51,17 @@ I hope this may help you understand the formula more intuitively.
 
 ### Source
 
-You can check my JS source and an example html on [Gist](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac) or [JSFiddle](https://jsfiddle.net/igarash1/8j56kcy7/2/).
+You can check my JS source and an example html on [Gist](https://gist.github.com/igarash1/83f7343026fa4b23fe5abe06ec5cc8ac) or [JSFiddle](https://jsfiddle.net/igarash1/8j56kcy7/10/).
 
 ### Usage
 Choose the vertices of polygon and click `Visualize!`.
 You can understand the area calculation in 2 ways as I explained - in the triangle way and the trapezoid way.
 Select `Triangle` or `Trapezoid` from the pull-down menu.
 Also, the coordinates of vertices will be shown in the left side area.
+
+<em><span style="background:dodgerblue;opacity:0.5;">blue</span> : <strong>+</strong>positive area, <span style="background:indianred;opacity:0.5;">red</span> : <strong>-</strong>negative area</em>
+<br>
+<em><strong>The points of polygon should be in counter-clockwise order.</strong></em>
 
 <style>
     .unselectable {
@@ -88,7 +92,6 @@ Also, the coordinates of vertices will be shown in the left side area.
                   placeholder="Coordinates displayed here." readonly></textarea>
     </form>
 </div>
+
 <div id="svgCanvas" style="float:left; margin-left:20px; unselectable="on" class="unselectable">
-<p><span style="background:dodgerblue;opacity:0.5;">blue</span> : <strong>+</strong>positive area, <span style="background:indianred;opacity:0.5;">red</span> : <strong>-</strong>negative area</p>
-<p><strong><i>The points of polygon should be in counter-clockwise order.</i></strong></p>
 </div>

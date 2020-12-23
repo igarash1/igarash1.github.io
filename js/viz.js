@@ -1,22 +1,21 @@
-const margin = { top: 20, right: 20, bottom: 30, left: 50 },
-    width = 400,
-    height = 400;
+const margin = {top: 20, right: 20, bottom: 30, left: 50};
 const delayUnit = 1000;
 const eps = 1e-5;
 const scaleWidth = 50,
     scaleHeight = 50;
-const xScale = d3.scaleLinear().range([0, width]);
-const yScale = d3.scaleLinear().range([height, 0]);
+let width = Math.min(400, window.innerWidth - 10),
+    height = Math.min(400, window.innerWidth - 10);
+let xScale = d3.scaleLinear().range([0, width]);
+let yScale = d3.scaleLinear().range([height, 0]);
 const vertexRadius = 3;
 
 let svg = initSvg();
-xScale.domain([0, scaleWidth]);
-yScale.domain([0, scaleHeight]);
-
 let timeouts = [];
 let poly = [];
 
 function initSvg() {
+    xScale.domain([0, scaleWidth]);
+    yScale.domain([0, scaleHeight]);
     return d3
         .select("#svgCanvas")
         .append("svg")
@@ -29,6 +28,20 @@ function initSvg() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 }
+
+function resize() {
+    const len = Math.min(400, Math.min(window.innerWidth - 400, window.innerHeight - 400))
+    width = len;
+    height = len;
+    xScale = d3.scaleLinear().range([0, width]);
+    yScale = d3.scaleLinear().range([height, 0]);
+    xScale.domain([0, scaleWidth]);
+    yScale.domain([0, scaleHeight]);
+    clear()
+    redrawPerimeter();
+}
+
+window.onresize = resize
 
 function clearTimeouts() {
     timeouts.forEach((item) => {
@@ -49,12 +62,12 @@ window.onload = () => {
 };
 
 // gridlines in x axis function
-function makeXGridlines() {
+function make_x_gridlines() {
     return d3.axisBottom(xScale).ticks(10);
 }
 
 // gridlines in y axis function
-function makeYGridlines() {
+function make_y_gridlines() {
     return d3.axisLeft(yScale).ticks(10);
 }
 
@@ -68,13 +81,13 @@ function clear() {
         .append("g")
         .attr("class", "grid")
         .attr("transform", "translate(0," + height + ")")
-        .call(makeXGridlines().tickSize(-height).tickFormat(""));
+        .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 
     // add the vertical gridlines
     svg
         .append("g")
         .attr("class", "grid")
-        .call(makeYGridlines().tickSize(-width).tickFormat(""));
+        .call(make_y_gridlines().tickSize(-width).tickFormat(""));
 
     // add the x-axis
     svg
@@ -86,6 +99,46 @@ function clear() {
     svg.append("g").call(d3.axisLeft(yScale));
 }
 
+function point(x, y) {
+    return {x: parseFloat(x), y: parseFloat(y)};
+}
+
+function pointToString(p) {
+    return "(" + p.x + "," + p.y + ")";
+}
+
+function cross(a, b) {
+    return a.x * b.y - a.y * b.x;
+}
+
+function dot(a, b) {
+    return a.x * b.x + a.y * b.y;
+}
+
+function norm(p) {
+    return p.x * p.x + p.y * p.y;
+}
+
+function ccw(a, b, c) {
+    const v1 = point(b.x - a.x, b.y - a.y);
+    const v2 = point(c.x - a.x, c.y - a.y);
+    if (cross(v1, v2) > eps) return +1; // counter clockwise
+    if (cross(v1, v2) < eps) return -1; // clockwise
+    if (dot(v1, v2) < eps) return +2; // c--a--b on line
+    if (norm(v1) < norm(v2)) return -2; // a--b--c on line
+    return 0;
+}
+
+function intersectSS(s, t) {
+    return (
+        ccw(s[0], s[1], t[0]) * ccw(s[0], s[1], t[1]) <= 0 &&
+        ccw(t[0], t[1], s[0]) * ccw(t[0], t[1], s[1]) <= 0
+    );
+}
+
+function samePoint(p1, p2) {
+    return Math.abs(p1.x - p2.x) < eps && Math.abs(p1.y - p2.y) < eps;
+}
 
 function intersectionExist(edge) {
     if (poly.length < 2) return false;
@@ -119,18 +172,18 @@ function mousedown(e, t) {
     cx = (cx / (width / scaleWidth)).toFixed(1);
     cy = (cy / (height / scaleHeight)).toFixed(1);
 
-    const point = point(cx, cy);
-    drawVertex(point);
+    const p = point(cx, cy);
+    drawVertex(p);
     if (poly.length > 0) {
-        drawLine(poly[poly.length - 1], point);
+        drawLine(poly[poly.length - 1], p);
     }
-    if (intersectionExist([poly[poly.length - 1], point])) {
+    if (intersectionExist([poly[poly.length - 1], p])) {
         alert("There should be no self-intersections.");
         clear();
         redrawPerimeter();
     } else {
-        document.getElementById("pointsForm").value += pointToString(point) + "\n";
-        poly.push(point);
+        document.getElementById("pointsForm").value += pointToString(p) + "\n";
+        poly.push(p);
     }
 }
 
@@ -288,46 +341,4 @@ function drawLine(p1, p2) {
         .attr("x2", xScale(p2.x))
         .attr("y2", yScale(p2.y))
         .attr("stroke", "black");
-}
-
-// http://www.prefield.com/algorithm/geometry/ccw.html
-function point(x, y) {
-    return { x: parseFloat(x), y: parseFloat(y) };
-}
-
-function pointToString(point) {
-    return "(" + point.x + "," + point.y + ")";
-}
-
-function cross(a, b) {
-    return a.x * b.y - a.y * b.x;
-}
-
-function dot(a, b) {
-    return a.x * b.x + a.y * b.y;
-}
-
-function norm(p) {
-    return p.x * p.x + p.y * p.y;
-}
-
-function ccw(a, b, c) {
-    const v1 = point(b.x - a.x, b.y - a.y);
-    const v2 = point(c.x - a.x, c.y - a.y);
-    if (cross(v1, v2) > eps) return +1; // counter clockwise
-    if (cross(v1, v2) < eps) return -1; // clockwise
-    if (dot(v1, v2) < eps) return +2; // c--a--b on line
-    if (norm(v1) < norm(v2)) return -2; // a--b--c on line
-    return 0;
-}
-
-function intersectSS(s, t) {
-    return (
-        ccw(s[0], s[1], t[0]) * ccw(s[0], s[1], t[1]) <= 0 &&
-        ccw(t[0], t[1], s[0]) * ccw(t[0], t[1], s[1]) <= 0
-    );
-}
-
-function samePoint(p1, p2) {
-    return Math.abs(p1.x - p2.x) < eps && Math.abs(p1.y - p2.y) < eps;
 }
