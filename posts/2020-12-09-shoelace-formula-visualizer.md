@@ -61,7 +61,7 @@ Also, the coordinates of vertices will be shown in the left side area.
 
 <em><span style="background:dodgerblue;opacity:0.5;">blue</span> : <strong>+</strong>positive area, <span style="background:indianred;opacity:0.5;">red</span> : <strong>-</strong>negative area</em>
 <br>
-<em><strong>The points of polygon should be in counter-clockwise order.</strong></em>
+<em>The points of polygon should be in counter-clockwise order.</em>
 
 <style>
     .unselectable {

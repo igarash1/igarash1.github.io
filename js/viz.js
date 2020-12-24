@@ -1,6 +1,7 @@
 const margin = {top: 20, right: 20, bottom: 30, left: 50};
 const delayUnit = 1000;
 const eps = 1e-5;
+const originalLen = 400
 const scaleWidth = 50,
     scaleHeight = 50;
 let width = Math.min(400, window.innerWidth - 10),
@@ -13,9 +14,19 @@ let svg = initSvg();
 let timeouts = [];
 let poly = [];
 
-function initSvg() {
+function initSize() {
+    const len = originalLen * Math.min(window.innerWidth / 100 * 90, window.innerHeight) / 800;
+    width = len;
+    height = len;
+    xScale = d3.scaleLinear().range([0, width]);
+    yScale = d3.scaleLinear().range([height, 0]);
     xScale.domain([0, scaleWidth]);
     yScale.domain([0, scaleHeight]);
+}
+
+function initSvg() {
+    // window.setTimeout(initSize(), 1);
+    initSize();
     return d3
         .select("#svgCanvas")
         .append("svg")
@@ -29,19 +40,11 @@ function initSvg() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 }
 
-function resize() {
-    const len = Math.min(400, Math.min(window.innerWidth - 400, window.innerHeight - 400))
-    width = len;
-    height = len;
-    xScale = d3.scaleLinear().range([0, width]);
-    yScale = d3.scaleLinear().range([height, 0]);
-    xScale.domain([0, scaleWidth]);
-    yScale.domain([0, scaleHeight]);
-    clear()
+window.addEventListener("resize", function() {
+    initSize();
+    clear();
     redrawPerimeter();
-}
-
-window.onresize = resize
+}, false);
 
 function clearTimeouts() {
     timeouts.forEach((item) => {
