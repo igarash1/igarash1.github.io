@@ -69,6 +69,24 @@ article .header {
   text-decoration: none;
 }
 
+ul, ol {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.medium-icon {
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+  margin: 1rem;
+}
+
+.small-icon {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: auto;
+}
+
 @media (max-width: 319px) {
   body {
     /*width: 90%;*/
