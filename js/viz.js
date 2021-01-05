@@ -180,10 +180,18 @@ function mousedown(e, t) {
     if (poly.length > 0) {
         drawLine(poly[poly.length - 1], p);
     }
-    if (intersectionExist([poly[poly.length - 1], p])) {
-        alert("There should be no self-intersections.");
+
+    function redraw() {
         clear();
         redrawPerimeter();
+    }
+
+    if (intersectionExist([poly[poly.length - 1], p])) {
+        alert("There must be no self-intersections.");
+        redraw();
+    } else if (poly.length === 2 && ccw(poly[0], poly[1], p) === -1) {
+        alert("The points must be in counter-clockwise order.");
+        redraw();
     } else {
         document.getElementById("pointsForm").value += pointToString(p) + "\n";
         poly.push(p);
