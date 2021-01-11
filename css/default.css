@@ -53,6 +53,12 @@ article .header {
   color: #555;
 }
 
+
+.post-list ul, ol {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
 .post-list li {
   font-size: 2.0rem;
 }
@@ -69,10 +75,6 @@ article .header {
   text-decoration: none;
 }
 
-ul, ol {
-  list-style: none;
-  margin-bottom: 1rem;
-}
 
 .medium-icon {
   width: 2rem;
